@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wisal — The business card that never runs out</title>
+<meta name="description" content="Wisal is your digital business card. Share with a QR in seconds — the person you meet needs no app. Scan paper cards, organise every contact, see your card working.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lime:#CDF201; --violet:#5A45FE; --ink:#0E1A2B; --ink2:#16263C;
+    --hair:#2A3F59; --paper:#F7F3EC; --muted:#9FB3C8; --steel:#7C9CBF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Outfit',system-ui,sans-serif;background:var(--ink);color:#fff;-webkit-font-smoothing:antialiased;}
+  a{text-decoration:none;color:inherit;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,26,43,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(42,63,89,.5);}
+  .nav-in{display:flex;align-items:center;gap:12px;height:68px;}
+  .badge{width:40px;height:40px;border-radius:10px;background:var(--lime);display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .badge svg{width:26px;height:26px;}
+  .brand{font-size:22px;font-weight:800;letter-spacing:-.8px;}
+  .nav-links{margin-left:auto;display:flex;gap:26px;align-items:center;font-size:14.5px;font-weight:500;color:var(--muted);}
+  .nav-links a:hover{color:#fff;}
+  .btn{display:inline-block;background:var(--lime);color:var(--ink);font-weight:700;border-radius:999px;padding:11px 24px;font-size:15px;transition:transform .15s ease, box-shadow .15s ease;}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(205,242,1,.35);}
+  .btn.ghost{background:transparent;color:#fff;border:1.5px solid var(--hair);}
+  .btn.ghost:hover{border-color:var(--muted);box-shadow:none;}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;padding:84px 0 0;}
+  .hero::before{content:'';position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(46% 42% at 82% 4%,rgba(90,69,254,.32),transparent 70%),
+               radial-gradient(40% 38% at 6% 66%,rgba(205,242,1,.10),transparent 70%);}
+  .hero-in{position:relative;display:flex;gap:60px;align-items:center;}
+  .hero-copy{flex:1;padding-bottom:84px;}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:1.5px;color:var(--lime);border:1px solid rgba(205,242,1,.35);border-radius:999px;padding:7px 16px;margin-bottom:26px;}
+  h1{font-size:clamp(40px,5.4vw,68px);font-weight:800;letter-spacing:-2.5px;line-height:1.03;}
+  h1 .hl{color:var(--lime);}
+  .lede{font-size:19px;line-height:1.6;color:var(--muted);margin:24px 0 34px;max-width:520px;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .cta-note{font-size:13px;color:var(--steel);margin-top:16px;}
+  .hero-phone{flex:0 0 340px;align-self:flex-end;}
+  .phone{border-radius:38px;border:7px solid var(--ink2);overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 80px rgba(205,242,1,.08);}
+  .phone img{display:block;width:100%;}
+  .hero .phone{border-bottom:none;border-radius:38px 38px 0 0;}
+
+  /* section scaffolding */
+  section{padding:92px 0;}
+  .sec-kicker{font-size:13px;font-weight:700;letter-spacing:2px;color:var(--violet);margin-bottom:12px;}
+  .on-dark .sec-kicker{color:var(--lime);}
+  h2{font-size:clamp(30px,3.6vw,44px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;}
+  .sec-sub{font-size:17px;color:var(--muted);margin-top:14px;max-width:560px;line-height:1.6;}
+
+  /* how it works */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px;}
+  .step{background:var(--ink2);border:1px solid var(--hair);border-radius:18px;padding:30px 26px;}
+  .step .n{width:38px;height:38px;border-radius:50%;background:var(--lime);color:var(--ink);font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+  .step h3{font-size:19px;font-weight:700;margin-bottom:8px;}
+  .step p{font-size:14.5px;color:var(--muted);line-height:1.6;}
+
+  /* features */
+  .features{background:var(--paper);color:var(--ink);}
+  .features .sec-sub{color:#5c6a78;}
+  .fgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px;}
+  .fcard{background:#fff;border:1px solid #e6e1d6;border-radius:16px;padding:26px 22px;}
+  .fcard .ic{width:40px;height:40px;border-radius:12px;background:rgba(90,69,254,.1);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .fcard .ic svg{width:22px;height:22px;stroke:var(--violet);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .fcard h3{font-size:16.5px;font-weight:700;margin-bottom:7px;}
+  .fcard p{font-size:13.5px;color:#5c6a78;line-height:1.55;}
+
+  /* screens strip */
+  .screens-strip{display:flex;justify-content:center;gap:40px;margin-top:56px;align-items:flex-start;}
+  .screens-strip .shot{flex:0 0 280px;}
+  .screens-strip .phone{border-radius:32px;}
+  .shot .cap{text-align:center;margin-top:16px;font-size:14px;color:var(--muted);}
+  .shot .cap b{display:block;color:var(--lime);font-size:16px;font-weight:700;margin-bottom:2px;}
+
+  /* plans */
+  .plans .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px;}
+  .pcard{border:1px solid var(--hair);border-radius:20px;padding:34px 28px;background:var(--ink2);display:flex;flex-direction:column;}
+  .pcard.hot{background:var(--lime);color:var(--ink);border-color:var(--lime);box-shadow:0 24px 70px rgba(205,242,1,.22);}
+  .pname{font-size:24px;font-weight:800;letter-spacing:-.5px;}
+  .ptag{font-size:13.5px;color:var(--muted);margin:4px 0 22px;}
+  .pcard.hot .ptag{color:rgba(14,26,43,.65);}
+  .pli{font-size:14.5px;line-height:2.15;color:#dbe4ec;}
+  .pcard.hot .pli{color:var(--ink);}
+  .pli .tick{color:var(--lime);font-weight:800;margin-right:8px;}
+  .pcard.hot .pli .tick{color:var(--violet);}
+  .pfoot{margin-top:auto;padding-top:24px;font-size:13px;color:var(--steel);}
+  .pcard.hot .pfoot{color:rgba(14,26,43,.6);}
+
+  /* localisation + privacy band */
+  .band{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .bcard{border:1px solid var(--hair);border-radius:20px;padding:36px 32px;background:var(--ink2);}
+  .bcard h3{font-size:21px;font-weight:800;letter-spacing:-.5px;margin-bottom:10px;}
+  .bcard h3 span{color:var(--lime);}
+  .bcard p{font-size:15px;color:var(--muted);line-height:1.65;}
+
+  /* final CTA */
+  .final{position:relative;text-align:center;overflow:hidden;padding:110px 0;}
+  .final::before{content:'';position:absolute;inset:0;background:radial-gradient(45% 60% at 50% 110%,rgba(90,69,254,.35),transparent 75%);}
+  .final .wrap{position:relative;}
+  .final .badge{width:76px;height:76px;border-radius:20px;margin:0 auto 26px;box-shadow:0 0 70px rgba(205,242,1,.35);}
+  .final .badge svg{width:48px;height:48px;}
+  .final .cta-row{justify-content:center;margin-top:34px;}
+
+  footer{border-top:1px solid rgba(42,63,89,.5);padding:34px 0;font-size:13.5px;color:var(--steel);}
+  .foot-in{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+  .foot-in a:hover{color:#fff;}
+  .foot-in .ar{margin-left:auto;color:var(--muted);}
+
+  @media (max-width:900px){
+    .hero-in{flex-direction:column;gap:40px;}
+    .hero-copy{padding-bottom:0;}
+    .hero-phone{flex:0 0 auto;width:270px;align-self:center;}
+    .steps,.band{grid-template-columns:1fr;}
+    .fgrid{grid-template-columns:1fr 1fr;}
+    .plans .pgrid{grid-template-columns:1fr;}
+    .screens-strip{flex-wrap:wrap;}
+    .nav-links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap nav-in">
+  <div class="badge"><svg viewBox="0 0 1024 1024"><text x="512" y="548" font-family="Outfit" font-weight="800" font-size="470" text-anchor="middle" fill="#0E1A2B">W</text><rect x="326" y="648" width="372" height="92" rx="46" fill="#DCD8FF"/><rect x="326" y="648" width="279" height="92" rx="46" fill="#B3ABFF"/><rect x="326" y="648" width="186" height="92" rx="46" fill="#857BFF"/><rect x="326" y="648" width="93" height="92" rx="46" fill="#5A45FE"/></svg></div>
+  <div class="brand">Wisal</div>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#plans">Plans</a>
+    <a href="/support">Support</a>
+  </div>
+  <a class="btn" href="#get" style="margin-left:18px">Get the app</a>
+</div></nav>
+
+<header class="hero"><div class="wrap hero-in">
+  <div class="hero-copy">
+    <div class="kicker">وِصال — CONNECTION</div>
+    <h1>The business card that <span class="hl">never runs out.</span></h1>
+    <p class="lede">One beautiful digital card for everything you do. Share it with a QR in seconds — the person you meet needs no app — and keep every contact you make, organised.</p>
+    <div class="cta-row">
+      <a class="btn" href="#get">Get Wisal for iOS</a>
+      <a class="btn ghost" href="/c/demo2rev8">See a live card →</a>
+    </div>
+    <div class="cta-note">Free to start · English & العربية · No ads, no tracking</div>
+  </div>
+  <div class="hero-phone"><div class="phone"><img src="img/home.png" alt="Wisal — My Card screen"></div></div>
+</div></header>
+
+<section id="how" class="on-dark"><div class="wrap">
+  <div class="sec-kicker">HOW IT WORKS</div>
+  <h2>Three steps. No paper.</h2>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h3>Create your card</h3><p>Photo, logo, role, links — with themes, fonts and accent colours. Separate personas for work, personal and speaking, switched from one screen.</p></div>
+    <div class="step"><div class="n">2</div><h3>Share with a QR</h3><p>Your branded QR and link are always ready. Anyone can scan it — your card opens in their browser instantly. They install nothing.</p></div>
+    <div class="step"><div class="n">3</div><h3>They save you — you keep them</h3><p>They save your details to their phone, photo included, and can send theirs back with one tap. Every exchange lands in your contacts, organised.</p></div>
+  </div>
+</div></section>
+
+<section id="features" class="features"><div class="wrap">
+  <div class="sec-kicker">FEATURES</div>
+  <h2>Everything a card should have been.</h2>
+  <p class="sec-sub">Wisal replaces the stack of paper in your pocket — and the pile of cards on your desk.</p>
+  <div class="fgrid">
+    <div class="fcard"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 19h2M14 21h2M21 14v2"/></svg></div><h3>QR & link sharing</h3><p>Share in seconds. The other person needs no app — the card opens in any browser.</p></div>
+    <div class="fcard"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div><h3>Saved with your face</h3><p>Your photo travels inside the contact card, so you're remembered — not just filed.</p></div>
+    <div class="fcard"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h3l2-3h6l2 3h3v13H4z"/><circle cx="12" cy="13" r="4"/></svg></div><h3>Scan paper cards</h3><p>Point the camera at any paper card — it becomes a clean, editable contact.</p></div>
+    <div class="fcard"><div class="ic"><svg viewBox="0 0 24 24"><path d="M17 3a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></div><h3>A CRM in your pocket</h3><p>Tags, notes and meeting timelines for every person you meet — searchable, exportable.</p></div>
+    <div class="fcard"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Card analytics</h3><p>Views, saves and taps, day by day and per card. Know what's working.</p></div>
+    <div class="fcard"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20c0-3.5 3-5.5 6.5-5.5s6.5 2 6.5 5.5M14.5 14.8c2.9.3 5 2 5 5.2"/></svg></div><h3>Built for teams</h3><p>Brand templates, a company directory and event lead capture for organisations.</p></div>
+    <div class="fcard"><div class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div><h3>Private by design</h3><p>Face ID app lock, full data export, one-tap deletion. No ads, no tracking — ever.</p></div>
+    <div class="fcard"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 4 5.6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-5.6-4-9s1.5-6.4 4-9z"/></svg></div><h3>English & العربية</h3><p>Fully bilingual, with two complete design styles and light & dark modes.</p></div>
+  </div>
+</div></section>
+
+<section class="on-dark"><div class="wrap">
+  <div class="sec-kicker">THE APP</div>
+  <h2>Made to be shown off.</h2>
+  <div class="screens-strip">
+    <div class="shot"><div class="phone"><img src="img/share.png" alt="Share screen with QR"></div><div class="cap"><b>Share</b>QR & link, always ready</div></div>
+    <div class="shot"><div class="phone"><img src="img/contacts.png" alt="Contacts screen"></div><div class="cap"><b>Contacts</b>everyone you meet, organised</div></div>
+    <div class="shot"><div class="phone"><img src="img/activity.png" alt="Activity dashboard"></div><div class="cap"><b>Activity</b>your card, working</div></div>
+  </div>
+</div></section>
+
+<section id="plans" class="plans on-dark"><div class="wrap">
+  <div class="sec-kicker">PLANS</div>
+  <h2>Start free. Upgrade when you're everywhere.</h2>
+  <div class="pgrid">
+    <div class="pcard">
+      <div class="pname">Free</div><div class="ptag">Get started and share your card</div>
+      <div class="pli"><span class="tick">✓</span>1 card · 50 contacts<br><span class="tick">✓</span>QR & link sharing<br><span class="tick">✓</span>Single-card scan<br><span class="tick">✓</span>Lock-screen widget</div>
+      <div class="pfoot">Free forever.</div>
+    </div>
+    <div class="pcard hot">
+      <div class="pname">Pro</div><div class="ptag">For power networkers</div>
+      <div class="pli"><span class="tick">✓</span>Unlimited cards & contacts<br><span class="tick">✓</span>Full design control · video cards<br><span class="tick">✓</span>Bulk & offline scan · voice-to-lead<br><span class="tick">✓</span>AI enrichment · card analytics<br><span class="tick">✓</span>NFC · wallet · CRM sync · Zapier</div>
+      <div class="pfoot">Everything in Free, plus the lot.</div>
+    </div>
+    <div class="pcard">
+      <div class="pname">Enterprise</div><div class="ptag">For teams and companies</div>
+      <div class="pli"><span class="tick">✓</span>Everything in Pro<br><span class="tick">✓</span>Team dashboard & directory<br><span class="tick">✓</span>Brand templates<br><span class="tick">✓</span>SSO · compliance<br><span class="tick">✓</span>Event lead-capture mode</div>
+      <div class="pfoot">Talk to us.</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="on-dark" style="padding-top:0"><div class="wrap band">
+  <div class="bcard"><h3>Bilingual, <span>properly.</span></h3><p>Wisal speaks English and العربية from first launch — and ships two complete design styles with light and dark modes, so the app matches you, not the other way round.</p></div>
+  <div class="bcard"><h3>Your data is <span>yours.</span></h3><p>Export everything you've ever added in one tap, or delete your account and all its data instantly, in-app. No ads, no tracking, no data brokers — connection shouldn't cost your privacy.</p></div>
+</div></section>
+
+<section id="get" class="final"><div class="wrap">
+  <div class="badge"><svg viewBox="0 0 1024 1024"><text x="512" y="548" font-family="Outfit" font-weight="800" font-size="470" text-anchor="middle" fill="#0E1A2B">W</text><rect x="326" y="648" width="372" height="92" rx="46" fill="#DCD8FF"/><rect x="326" y="648" width="279" height="92" rx="46" fill="#B3ABFF"/><rect x="326" y="648" width="186" height="92" rx="46" fill="#857BFF"/><rect x="326" y="648" width="93" height="92" rx="46" fill="#5A45FE"/></svg></div>
+  <h2>Never hand out paper again.</h2>
+  <p class="sec-sub" style="margin:14px auto 0">Wisal for iOS is in TestFlight now, with the App Store release on the way.</p>
+  <div class="cta-row">
+    <a class="btn" href="/support">Request early access</a>
+    <a class="btn ghost" href="/c/demo2rev8">See a live card →</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap foot-in">
+  <span>© 2026 The Socials LLC</span>
+  <a href="/privacy">Privacy</a>
+  <a href="/support">Support</a>
+  <span class="ar">وِصال — connection · reunion</span>
+</div></footer>
+
+</body>
+</html>
